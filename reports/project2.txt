@@ -1,0 +1,50 @@
+******** GROUP #4 ********
+Elizabeth Alfaras 3433990
+Serge Metellus 4742244
+Andrew Castillo 5164207
+**************************
+
+The objective of this project was to turn Nachos into a multiprogramming Operating System, with working set of basic system calls. 
+
+Initally, Nachos starts by running an initial thread. That thread is opened and stored as an executable. That executa/Users/elizabethalfaras/School/OS/nachos-3.4-linux/nachos-3.4/code/reports/project2.txtble is passed to AddrSpace where a new address space is created for it and loaded with the contents of the executable. Simulated machine registers and memory managament hardware are initalized for the new executable. Based on this address space (pagesize and size) a PageTable is created. 
+	
+	The page table facilitates the translation between the virtual address pages and physical address pages. It does so by tracking the which page goes to which frame.  A virtual page is a divided section or block of the executable. A frame is the divided section or block of physical memory. These frames are used to to enable muliprogramming in the O.S. as they are allocated to store pages of many processes. The frames use a bitmap datastructure  to all access to each element of the array at a fine granularity (1 bit). This helps to keep track of free disk sectors, page allocations, independently set, clear, and test an array of bits. 
+	
+	When a system call is made control transfers from the user mode to machine as it runs the program. Depending on the type of system call the exception handlers issues the appropriate interrupt that was requested from user mode. 
+	
+Group 4 began by implementing and completing the steps 2-4 outlined on the implementation guide. Step 2, required a new Memory Manager be created to facilite contiguous virtual memory. GetPage function is used to allocate free frames in the simulated physical memory per the number of total pages in virtual memory. ClearPage function is used to free the frame requested. The frameMap is created with a bitmap datastructure, to keep track of free and clear frames. 
+
+	AddrSpace constructor was modified to use the frames allocated in the GetPage function to represent physical memory in the page table. 
+	
+	Then, Translate function was implemented, which converts the virtural and physical addresses. If the virtural address is valid then it is translated by the following formula : page size x physical page at that index + the offest. This function returns true of false depending on the if the virtual address was valid or not. 
+	
+	ReadFile was created to load and store the code and data segments into the translated memory. ReadAt functions was used to read the file address, size and store contents into a buffer. The buffer is copied, while contents remain, from with the bcopy function to the main memory at the appropriate physical address for a given size. 
+	
+	Process Control Block contains the attributes of a process. Some of these attributes include the PID, parent PID and thread and the processmanager is similar in function to the memory manager. 
+	
+	Yield (system call) is used by a process executing in user mode to temporarily reliquish the CPU to another process.
+
+Group 4 attempted but unfortunitly were not able to complete implentation of :
+	
+	Fork (system call) which creates a new user-level (child process, whose address space starts out as a copy of the parents. Then, the child abandons the orginal program and starts to execute the function supplied by the single argument.
+	Exit (system call) takes an integer status value. The current running process is terminated.
+	Exec ( system call) replaces the current process state with a new process executing program from file.
+	Kill (system call) It returns 0 if successful and -1 if not.
+	Join(system call) The return value of the Join call is the exit status of the process for which it was waiting or -1 in the case of error
+	
+To test we used a combination of print statements and debugging flags to understand how to the process was moving through the O.S, where it was in memory and its status at any given time. 
+
+**********************************UPDATE*********************************
+
+With extension our group was able to complete the following syscalls
+
+fork()
+	System call is different from Exec system call in that Fork will create a new process (child) that runs a user function specified by the arguement for the call, while Ecec will Start a process that runds a different executable file. 
+	The child process address space will be a duplicate of the parents 'current thread' space. It sets then Yields(). The child thread runs a dummy function that will copy back the machines registers, pc, and return registers saved from before the Yield was performed. 
+Exit 
+	(system call) takes an integer status value. The current running process is terminated.
+Exec 
+	( system call) replaces the current process state with a new process executing program from file.
+Yield 
+	(system call) is used by a process executing in user mode to temporarily reliquish the CPU to another process.
+

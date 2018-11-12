@@ -215,6 +215,7 @@ syscallExit()
     //if this is the last process, then just exit
     delete addSpace;
     currentThread->Finish();
+    //Syscall ends
     
 }
 /* Join

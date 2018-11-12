@@ -93,11 +93,136 @@ ExceptionHandler(ExceptionType which)
                     break;
                 }
                 
+
             case SC_Exit:
                 {
                     DEBUG('a', "Exit, initiated by user program.\n");
                     syscallExit();
                     break;
+
+                OpenFile *executable = fileSystem->Open(filename);
+                AddrSpace *space;
+                //Error checking for file open
+                if (executable == NULL) {
+                    printf("Unable to open file %s\n", filename);
+                    return;
+                }
+                //Create new AddrSpace
+                space = new AddrSpace(executable);
+                //Copy old AddrSpace to new one
+                space = currentThread -> space;
+
+                //Create new thread
+                Thread *cThread = new Thread("Child Thread");
+                //Associate new AddrSpace with new Thread
+                cThread -> space = space;
+
+                //Create new PCB
+                forkPCB = new PCB();
+                //Set PCB values
+                forkPCB = {pid, ppid, etc.};
+
+
+    //if this is the last process, then just exit
+    delete addSpace;
+    currentThread->Finish();
+    //Syscall ends
+    
+}
+/* Join
+STEPS
+1. Read process id from register r4.
+2. Make sure the requested process id is the child process of the current process.
+3. Keep on checking if the requested process is finished. if not, yield the current process.
+4. If the requested process finished, write the requested process exit id to register r2 to return it.
+*/
+int 
+syscallJoin()
+{
+    
+    printf("System Call: [%d] invoked Join.\n", currentThread->space->getPID()); 
+  
+    //Read process id from register r4.
+    int pid = machine->ReadRegister(4);
+     
+   // Make sure the requested process id is the child process of the current process.
+	if(currentThread->space->getPCB()->getParent()->getID() == pid)
+	{
+	        machine->WriteRegister(2, -1);
+		return -1;
+	}
+    
+    if(currentThread->space->getPCB()->checkForChild(pid))
+    {
+    //Keep on checking if the requested process is finished. if not, yield the current process.
+        while(currentThread->space->getPCB()->checkForChild(pid))
+    	{
+		    currentThread->Yield();
+    	}
+    //If the requested process finished, write the requested process exit id to register r2 to return it.
+        machine->WriteRegister(2, currentThread->space->getPCB()->getChildExitValue());
+	    return (currentThread->space->getPCB()->getChildExitValue());
+    }
+    else
+    {
+        machine->WriteRegister(2, -1);
+    }
+
+                //Copy old register to new register
+                InitRegisters() = oldReg;
+                //copy r4
+                PCReg = oldReg;
+                //Save new register values to new AddrSpace
+                space ->InitRegisters();
+
+
+                //Creates new kernel thread and sets address space to duplicate current Thread
+                currentThread->Fork(setBehavior(), oldReg);
+                break;
+                //join
+*/
+/*            case SC_Yield:
+            //==================================================================================
+            //Steps:
+            //  1. Save currentThread state
+            //  2. Call Thread::Yield() 
+            //==================================================================================
+            
+                currentThread->Yield();
+                break;
+*/                
+//            case SC_Exec:
+            //==================================================================================
+            /* The Exec(filename) system call spawns a new user-level thread (process), but 
+                creates a new address space and begins executing a new program given by the 
+                object code in the Nachos file whose name is supplied as an argument to the 
+                call. It should return to the parent a SpaceId which can be used to uniquely 
+                identify the newly created process.
+            */
+           
+            //Steps:
+            //  1. Need method for transferring data(name of executable as arg for syscall)
+            //  2. Verify file exists
+            //  3. Consult the  exec. file to determine amount of physical memory is required 
+            //     for new program (physical mem should be allocated and initialized w/data 
+            //     from exec. file)
+            //  4. Page table thread adjusted for new program, MIPS registers reinitialized
+            //     for starting at beginning of new program, control should return to user mode
+            //     (See progtest.cc)
+            // NOTE: Using "machine->Run" to execute user program terminates the current thread.
+            //       Find a way to return space ID for Exec to work 
+            //==================================================================================
+                //Read Register to r4 to get exec path
+/*                int execPath = machine -> ReadRegister(4);
+
+                //Replace memory w content of exec
+
+                //Init Registers
+                currentThread -> space -> InitRegisters();
+
+                if(exec == successful){
+                    machine -> WriteRegister(2) = 1
+
                 }
                 
             case SC_Exec:

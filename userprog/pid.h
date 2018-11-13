@@ -1,3 +1,7 @@
+#ifndef PID_H
+#define PID_H 
+
+#include "UserOpenFile.h"
 class pid
 {
     public:
@@ -7,3 +11,4 @@ class pid
     private:
 	bool ids[32];
 };
+#endif PID_H

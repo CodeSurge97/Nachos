@@ -2,6 +2,7 @@
 #define ProcessManager_H
 
 #include "pcb.h"
+#include "UserOpenFile.h"
 class pcb;
 
 class ProcessManager

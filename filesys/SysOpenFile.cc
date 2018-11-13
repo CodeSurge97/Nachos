@@ -1,6 +1,7 @@
 #include "copyright.h"
 #include "openfile.h"
 #include "SysOpenFile.h"
+
 /*
 This will contain the array of the system's open files and allow access to those objects. It will decide if a file already exists or if it really needs to be closed or not. You can use the bitmap (that you used in part one of the project) for managing the array of open files.
 */
@@ -17,8 +18,8 @@ SysOpenFile::SysOpenfile(int fileID, char* fileName, OpenFile* file)
 	//bitmap to manage files
 	mapFiles = new BitMap(ARRAY_SIZE);
 	
-	//convert int to string and create new char obj
-	newName = new char[strlen(fileID)+1];
+	//create new char namespace of length fileName+1
+	newName = new char[strlen(fileName)+1];
 	strcpy(newName, fileName);
 	
 	

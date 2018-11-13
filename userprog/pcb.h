@@ -1,17 +1,15 @@
 #ifndef PCB_H
 #define PCB_H 
 
-#include "../threads/thread.h"
-class Thread;
-
-#include "../threads/synch.h"
-class Lock;
-
-
+#include "thread.h"
+#include "synch.h"
 #include "addrspace.h"
-class AddrSpace;
-
 #include "processmanager.h"
+#include "UserOpenFile.h"
+
+class Thread;
+class Lock;
+class AddrSpace;
 class ProcessManager;
 
 

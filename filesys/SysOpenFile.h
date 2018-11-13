@@ -6,7 +6,7 @@ Class that contains pointer to the file system's openfile object as well as the 
 #ifndef SysOpenFile_H
 #define SysOpenFile_H
 
-#define ARRAY_SIZE 32;
+#define ARRAY_SIZE 32
 
 #include "copyright.h"
 #include "openfile.h"

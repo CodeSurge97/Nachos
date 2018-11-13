@@ -15,6 +15,7 @@ class ProcessManager
 	bool validPID(int pid); 
 	void setParentNull();
 	pcb* getThisPCB(int pcbID);
+	//OpenUserFiles* getOpenUserFiles(char *fileName);
 
     private:
     pcb *pcbArray[32];

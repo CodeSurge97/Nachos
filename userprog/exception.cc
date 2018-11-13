@@ -28,6 +28,7 @@
 #include "pcb.h"
 #include "addrspace.h"
 #include "processmanager.h"
+
 class pcb;
 class ProcessManager;
 class AddrSpace;

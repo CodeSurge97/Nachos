@@ -6,6 +6,8 @@ Class that contains pointer to the file system's openfile object as well as the 
 #ifndef SysOpenFile_H
 #define SysOpenFile_H
 
+#define ARRAY_SIZE 32;
+
 #include "copyright.h"
 #include "openfile.h"
 /*
@@ -20,6 +22,10 @@ class SysOpenFile {
 		int procCount;
 		char *newName;
 		OpenFile* openFile;
-		SysOpenFile* file[50];
+		SysOpenFile* file[ARRAY_SIZE];
+		bool OpenFileArray(char *fileName);
+		bool clearID(int i);
+	private:
+		BitMap* mapFiles; 
 };
 #endif SysOpenFile_H

@@ -5,9 +5,9 @@ class UserOpenFile{
     public:
         UserOpenFile(char* fileName, int index, int fID);
         ~UserOpenFile();
-        int fID;
-        int index;
-        char *fileName;
+        int fileID;
+        int desiredIndex;
+        char *theOpenFile;
         int offset;
 };
 

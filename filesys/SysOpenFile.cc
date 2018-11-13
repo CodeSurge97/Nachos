@@ -2,37 +2,47 @@
 #include "openfile.h"
 #include "SysOpenFile.h"
 
+
+#include "synchlist.h"
+#include "filesys.h"
+
+
 /*
 This will contain the array of the system's open files and allow access to those objects. It will decide if a file already exists or if it really needs to be closed or not. You can use the bitmap (that you used in part one of the project) for managing the array of open files.
 */
-void
-SysOpenFile::SysOpenfile(int fileID, char* fileName, OpenFile* file)
+
+
+SysOpenFile::SysOpenFile(int fileID, char* fileName, OpenFile* file)
 {
-	id = FileId;
+	id = fileID;
 	//openfile object that will be used to actually read and right to this file. 
 	openFile = file;
 	
-	//memLock obj
-	Lock* memLock = new Lock("FILE LOCK"); 
+	memLock = new Lock("FILE LOCK"); 
 	
 	//bitmap to manage files
 	mapFiles = new BitMap(ARRAY_SIZE);
 	
+
 	//create new char namespace of length fileName+1
+
+	//convert int to string and create new char obj
+
 	newName = new char[strlen(fileName)+1];
 	strcpy(newName, fileName);
 	
 	
 	//# of processes using file
 	//procCount = 
-	//a file needs to be opeend or already open
-	if(fileName exists in SysOpenArray){
+	//a file needs to be opened or already open
+
+	//Is file already open
+	if(OpenFileArray(fileName)){
 		//file already open
-		printf('File already open');
+		printf("File already open");
 	}
 	else{
-		//look at openfile.h for sector
-		Openfile(sector);
+    	OpenFile openFile = fileSystem->Open(fileName);
 	}
 	
 }

@@ -1,5 +1,5 @@
 /* SysOPenFile
-	Class that contains pointer to the file system's openfile object as well as the systems (int)FileID and (char *) fileName for that file and the number of user processes accessing currently it.
+Class that contains pointer to the file system's openfile object as well as the systems (int)FileID and (char *) fileName for that file and the number of user processes accessing currently it.
 */
 
 

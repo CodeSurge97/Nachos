@@ -10,5 +10,5 @@ class UserOpenFile{
         char *theOpenFile;
         int offset;
 };
+#endif UserOpenFile_H
 
-#endif 

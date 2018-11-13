@@ -1,6 +1,7 @@
 #include "pcb.h"
 #include "system.h"
 
+//@Liz Does this already take care of the first part of #3 on Guide?
 pcb::pcb(Thread *input)
 {
 	int i;

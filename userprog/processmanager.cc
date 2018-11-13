@@ -92,9 +92,10 @@ pcb* ProcessManager:: getThisPCB(int pcbID)
 	}
 	return NULL;
 }
-
-ProcessManager:: getOpenUserFiles(char *fileName)
+/*
+ProcessManager::getOpenUserFiles(char *fileName)
 {
 	//return a OpenUserFiles object given fileName
 	return //...
 }
+*/

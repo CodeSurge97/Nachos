@@ -5,7 +5,14 @@
 
 #include "synchlist.h"
 #include "filesys.h"
+#include "system.h"
+#include "stdio.h";
 
+//#include <scnhdr.h>
+//#include <syms.h>
+//#include <ldfcn.h>
+//#include "int.h"
+extern char *strcpy();
 
 /*
 This will contain the array of the system's open files and allow access to those objects. It will decide if a file already exists or if it really needs to be closed or not. You can use the bitmap (that you used in part one of the project) for managing the array of open files.
@@ -42,21 +49,21 @@ SysOpenFile::SysOpenFile(int fileID, char* fileName, OpenFile* file)
 		printf("File already open");
 	}
 	else{
-    	OpenFile openFile = fileSystem->Open(fileName);
+    	OpenFile *openFile = fileSystem->Open(fileName);
 	}
 	
 }
 int 
 SysOpenFile::GetID()
 {
-	
+	return -1;
 }
 /*
 	ClearID 
 		checks bitmap for unallocated bits 
 */
 bool
-SysOpenFile::ClearID(int i);
+SysOpenFile::ClearID(int i)
 {
 	//check if files exits
 	if(mapFiles->NumClear() >= ARRAY_SIZE)

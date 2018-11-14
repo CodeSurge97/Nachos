@@ -28,7 +28,6 @@
 #include "pcb.h"
 #include "addrspace.h"
 #include "processmanager.h"
-
 class pcb;
 class ProcessManager;
 class AddrSpace;
@@ -119,46 +118,6 @@ if ((which == SyscallException))
                 DEBUG('a', "Join, initiated by user program.\n");
                 syscallJoin();
                 break;
-            }
-        case SC_Create:
-            int virtualAd = machine -> ReadRegister(4);
-            char *FileName = new char[256];
-            currentThread -> space -> getString(fileName, virtualAd);
-            fileSystem -> Create(fileName, 0);
-            break;
-        case SC_Open:
-            int virtualAd = machine -> ReadRegister(4);
-            char *FileName = new char[256];
-            currentThread -> space -> getString(fileName, virtualAd);
-
-            //Add new process 'open File' to your list of your process' open files
-            /*Code here*/
-
-            //check to see if the system has this file open yet
-            if(/*fileopen?*/){
-                //system file table increments the counter for this file
-            }
-            else{
-                //add a new system open file
-                fileSystem -> Open(filenName);
-            }
-        case SC_Close:
-            int virtualAd = machine -> ReadRegister(4);
-
-            OpenFile *openedFile = (OpenFile*)virtualAd;
-            fileSystem -> Remove(/*FileName*/);
-            
-            //Using the file id passed in(how do we get the id?), remove open file from process list of
-            //open files
-            /*File ID*/
-
-            //it in turn will let the system file table know to remove the file if necessary
-            if(count > 0){
-                count--;
-            }
-            else{
-                //remove file from list and close it
-                fileSystem ->
             }
         
     }

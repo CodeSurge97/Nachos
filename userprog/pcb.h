@@ -12,6 +12,7 @@ class Lock;
 class AddrSpace;
 class ProcessManager;
 
+#define ARRAY_SIZE 21
 
 class pcb {
     public:
@@ -31,11 +32,11 @@ class pcb {
 	int getChildExitValue();
 	void setParentsNull();
 	Thread* returnThread();
+	//modify PCB to contain array of OpenUserFiles
+//	UserOpenFile *openUserFiles[ARRAY_SIZE];
 
 	
     private:
-	int MAX_FILES;
-	
 	Thread *processThread;
 	AddrSpace *AdSpace;
 	int processID;

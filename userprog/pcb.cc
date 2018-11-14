@@ -1,7 +1,7 @@
 #include "pcb.h"
 #include "system.h"
 
-//@Liz Does this already take care of the first part of #3 on Guide?
+
 pcb::pcb(Thread *input)
 {
 	int i;
@@ -11,7 +11,6 @@ pcb::pcb(Thread *input)
 	processThread = input;
 	children = new ProcessManager();
 	childExitValue=0;
-	MAX_FILES = 21;
 
 }
 

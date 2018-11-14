@@ -8,10 +8,6 @@
 #include "system.h"
 #include "stdio.h";
 
-//#include <scnhdr.h>
-//#include <syms.h>
-//#include <ldfcn.h>
-//#include "int.h"
 extern char *strcpy();
 
 /*
@@ -70,11 +66,11 @@ SysOpenFile::ClearID(int i)
 	{
 		return false;
 	}
-	//ensure mutal exclusion 
+	//ensure mutual exclusion 
 	memLock->Acquire();
 	//clear file in bitmap at index i
 	mapFiles->Clear(i);
-	//ensure mutal exclusion 
+	//ensure mutual exclusion 
 	memLock->Release();
 	
 	return true;
@@ -98,6 +94,7 @@ SysOpenFile::OpenFileArray(char *fileName)
 	
 	for(i=2; i < usedFiles; i++)
 	{
+		//Does the file already exist in the array?
 		if(strcmp(file[i]->newName, fileName) == 0)
 		{
 			return i; 
